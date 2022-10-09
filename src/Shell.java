@@ -40,11 +40,12 @@ class Shell extends Thread {
 
     }
 
-    public String[] generateCmd(String[] args, int first, int passed) {
-        int length = passed-first + 1;
+    //returns a String array using the elements of args from first to last
+    public String[] generateCmd(String[] args, int first, int last) {
+        int length = last-first + 1;
         String[] command = new String[length];
         int count = 0;
-        for (int i = first; i < passed; i++) {
+        for (int i = first; i < last; i++) {
             command[count] = args[i];
             count++;
         }
