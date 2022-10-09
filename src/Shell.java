@@ -19,7 +19,10 @@ class Shell extends Thread {
                         || i == args.length - 1 ) {
                     String[] command = generateCmd( args, first, ( i==args.length - 1 ) ? i+1 : i );
                     if ( command != null ) {
-
+                        if (command[0].equals("exit")) {
+                            SysLib.cout("Exiting");
+                            SysLib.exit();
+                        }
                         // check if command[0] is "exit". If so, get terminated
                         // otherwise, pass command to SysLib.exec( )
                         // if args[i]="&" don’t call SysLib.join( ), Otherwise (i.e., ";"), keep calling SysLib.join( )
@@ -38,6 +41,13 @@ class Shell extends Thread {
     }
 
     public String[] generateCmd(String[] args, int first, int passed) {
-        return null;
+        int length = passed-first + 1;
+        String[] command = new String[length];
+        int count = 0;
+        for (int i = first; i < passed; i++) {
+            command[count] = args[i];
+            count++;
+        }
+        return command;
     }
 }
